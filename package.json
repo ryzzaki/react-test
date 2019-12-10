@@ -5,17 +5,20 @@
   "author": "Cuong Nguyen",
   "license": "MIT",
   "scripts": {
+    "dev:mock": "cross-env PET_MOCK=mock parcel src/index.html",
     "dev": "parcel src/index.html",
     "lint": "eslint \"src/**/*.{js, jsx}\" --quiet",
     "format": "prettier \"src/**/*.{js, html}\" --write"
   },
   "dependencies": {
     "@frontendmasters/pet": "^1.0.3",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "@reach/router": "^1.2.1",
+    "react": "15.x || 16.x || 16.4.0-alpha.0911da3",
+    "react-dom": "15.x || 16.x || 16.4.0-alpha.0911da3"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
+    "cross-env": "^6.0.3",
     "eslint": "^6.7.2",
     "eslint-config-prettier": "^6.7.0",
     "eslint-plugin-import": "^2.19.1",
@@ -24,5 +27,8 @@
     "eslint-plugin-react-hooks": "^2.3.0",
     "parcel-bundler": "^1.12.4",
     "prettier": "^1.19.1"
-  }
+  },
+  "browserslist": [
+    "last 2 Chrome versions"
+  ]
 }

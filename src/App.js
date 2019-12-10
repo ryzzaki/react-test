@@ -1,6 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { Router, Link } from '@reach/router';
 import SearchParams from './SearchParams';
+import Details from './Details';
 
 const App = () => {
   // return React.createElement('div', { id: 'some-id' }, [
@@ -22,10 +24,17 @@ const App = () => {
   //   }),
   // ]);
   return (
-    <div>
-      <h1 id="some-id">Eat Me!</h1>
-      <SearchParams />
-    </div>
+    <React.StrictMode>
+      <div>
+        <header>
+          <Link to="/">Eat Me!</Link>
+        </header>
+        <Router>
+          <SearchParams path="/" />
+          <Details path="/details/:id" />
+        </Router>
+      </div>
+    </React.StrictMode>
   );
 };
 
