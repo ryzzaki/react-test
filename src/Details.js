@@ -1,6 +1,7 @@
 import React from 'react';
 import pet from '@frontendmasters/pet';
 import Carousel from './Carousel';
+import ErrorBoundary from './ErrorBoundary';
 
 class Details extends React.Component {
   state = { loading: true }; // use this instead of the constructor thanks to @babel/preset-react
@@ -39,4 +40,11 @@ class Details extends React.Component {
   }
 }
 
-export default Details;
+export default function DetailsWithErrorBoundary(props) {
+  // ...props will spread props across Detail - props are passed through from parents
+  return (
+    <ErrorBoundary>
+      <Details {...props} />
+    </ErrorBoundary>
+  );
+}
