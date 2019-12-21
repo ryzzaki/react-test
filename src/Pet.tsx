@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { Link } from '@reach/router';
+import { Photo } from '@frontendmasters/pet';
 
-export default function Pet({ name, animal, breed, media, location, id }) {
+interface IProps {
+  name: string;
+  animal: string;
+  breed: string;
+  media: Photo[];
+  location: string;
+  id: number;
+}
+
+export default function Pet<FunctionComponent>(props: IProps) {
   // return React.createElement('div', {}, [
   //   React.createElement('h1', {}, name),
   //   React.createElement('h2', {}, animal),
@@ -15,6 +25,7 @@ export default function Pet({ name, animal, breed, media, location, id }) {
   //     <h2>{breed}</h2>
   //   </div>
   // );
+  const { name, animal, breed, media, location, id } = props;
 
   let hero = 'http://placecorgi.com/300/300';
   if (media.length) {

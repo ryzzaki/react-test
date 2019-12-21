@@ -1,25 +1,25 @@
 // mostly code from https://reactjs.org/docs/error-boundaries.html
-import React, { Component } from 'react';
+import React, { Component, ErrorInfo } from 'react';
 import { Link, Redirect } from '@reach/router';
 
 class ErrorBoundary extends Component {
-  state = { hasError: false, redirect: false };
+  public state = { hasError: false, redirect: false };
   // static method gets called on the class not on the instance - it has to be named like this, this is a lifecycle method
-  static getDerivedStateFromError() {
+  public static getDerivedStateFromError() {
     return { hasError: true };
   }
 
-  componentDidCatch(error, info) {
+  public componentDidCatch(error: Error, info: ErrorInfo) {
     console.error('Got an error: ', error, info);
   }
   // this is for the 5s auto redirect
-  componentDidUpdate() {
+  public componentDidUpdate() {
     if (this.state.hasError) {
       setTimeout(() => this.setState({ redirect: true }), 5000);
     }
   }
 
-  render() {
+  public render() {
     if (this.state.redirect) {
       return <Redirect to="/" />;
     }

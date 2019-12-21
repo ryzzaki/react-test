@@ -1,16 +1,30 @@
 import React from 'react';
-import pet from '@frontendmasters/pet';
+import pet, { Photo } from '@frontendmasters/pet';
 import Carousel from './Carousel';
 import ErrorBoundary from './ErrorBoundary';
 import ThemeContext from './ThemeContext';
-import { navigate } from '@reach/router';
+import { navigate, RouteComponentProps } from '@reach/router';
 import Modal from './Modal';
 
-class Details extends React.Component {
-  state = { loading: true, showModal: false }; // use this instead of the constructor thanks to @babel/preset-react
+class Details extends React.Component<RouteComponentProps<{ id: string }>> {
+  public state = {
+    loading: true,
+    showModal: false,
+    name: '',
+    animal: '',
+    location: '',
+    description: '',
+    media: [] as Photo[],
+    url: '',
+    breed: '',
+  }; // use this instead of the constructor thanks to @babel/preset-react
 
-  componentDidMount() {
-    pet.animal(this.props.id).then(({ animal }) => {
+  public componentDidMount() {
+    if (!this.props.id) {
+      navigate('/');
+      return;
+    }
+    pet.animal(+this.props.id).then(({ animal }) => {
       this.setState({
         url: animal.url,
         name: animal.name,
@@ -24,10 +38,11 @@ class Details extends React.Component {
     });
   }
 
-  toggleModal = () => this.setState({ showModal: !this.state.showModal });
-  adopt = () => navigate(this.state.url);
+  public toggleModal = () =>
+    this.setState({ showModal: !this.state.showModal });
+  public adopt = () => navigate(this.state.url);
 
-  render() {
+  public render() {
     if (this.state.loading) {
       return <h1>Loading...</h1>;
     }
@@ -76,7 +91,9 @@ class Details extends React.Component {
   }
 }
 
-export default function DetailsWithErrorBoundary(props) {
+export default function DetailsWithErrorBoundary(
+  props: RouteComponentProps<{ id: string }>,
+) {
   // ...props will spread props across Detail - props are passed through from parents
   return (
     <ErrorBoundary>
