@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import pet from '@frontendmasters/pet';
 import Carousel from './Carousel';
 import ErrorBoundary from './ErrorBoundary';
 import ThemeContext from './ThemeContext';
 import { navigate } from '@reach/router';
-import Modal from './Modal';
+import _ from 'lodash';
+import moment from 'moment';
+
+// this is just to make the Detail.js heavier to prove the point, both libraries are big
+console.log(_, moment);
+// Dynamically import Modal when it is needed
+const Modal = lazy(() => import('./Modal'));
 
 class Details extends React.Component {
   state = { loading: true, showModal: false }; // use this instead of the constructor thanks to @babel/preset-react
